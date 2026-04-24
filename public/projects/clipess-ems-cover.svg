@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <rect width="1600" height="900" fill="#0B1020"/>
+  <rect width="1600" height="900" fill="url(#g2)"/>
+  <circle cx="1240" cy="170" r="250" fill="#A78BFA" fill-opacity="0.18"/>
+  <circle cx="280" cy="740" r="320" fill="#38BDF8" fill-opacity="0.16"/>
+  <rect x="120" y="120" width="1360" height="660" rx="30" fill="#0D172A" fill-opacity="0.72" stroke="#A78BFA" stroke-opacity="0.32"/>
+  <text x="190" y="280" fill="#E5E7EB" font-family="Segoe UI, Arial, sans-serif" font-size="66" font-weight="700">Clipess</text>
+  <text x="190" y="350" fill="#C4B5FD" font-family="Segoe UI, Arial, sans-serif" font-size="44" font-weight="600">Employee Management System</text>
+  <text x="190" y="470" fill="#93C5FD" font-family="Segoe UI, Arial, sans-serif" font-size="30">Inventory  "  Leave  "  Attendance  "  Task Manager</text>
+  <text x="190" y="540" fill="#94A3B8" font-family="Segoe UI, Arial, sans-serif" font-size="30">ASP.NET  "  MSSQL  "  Azure  "  React  "  Tailwind CSS</text>
+  <defs>
+    <linearGradient id="g2" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#111827"/>
+      <stop offset="1" stop-color="#0B1020"/>
+    </linearGradient>
+  </defs>
+</svg>

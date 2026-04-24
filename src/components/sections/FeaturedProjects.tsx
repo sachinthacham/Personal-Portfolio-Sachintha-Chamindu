@@ -13,17 +13,15 @@ export function FeaturedProjects() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <AnimatedSection className="text-center mb-16">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <div className="h-px w-10 bg-primary" />
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider">
-              Featured Work
-            </span>
-            <div className="h-px w-10 bg-primary" />
+          <div className="flex items-center justify-center gap-3 mb-5">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-primary/45" />
+            <span className="section-eyebrow">Featured Work</span>
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-primary/45" />
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+          <h2 className="section-title mb-5">
             Projects I&apos;m proud of
           </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="section-lead">
             A selection of my most impactful work — from AI-powered SaaS platforms to
             distributed systems and developer tools.
           </p>

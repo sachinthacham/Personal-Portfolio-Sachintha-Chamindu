@@ -40,10 +40,14 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
     >
       <Card className="h-full flex flex-col group overflow-hidden border-border/60 hover:border-primary/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5">
         {/* Image / gradient */}
-        <div
-          className={`h-48 bg-gradient-to-br ${gradient} relative overflow-hidden flex items-center justify-center`}
-        >
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-black/20 to-transparent" />
+        <div className={`h-48 bg-linear-to-br ${gradient} relative overflow-hidden flex items-center justify-center`}>
+          <img
+            src={project.image}
+            alt={project.title}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/25" />
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-t from-black/35 to-transparent" />
 
           {/* Category badge */}
           <div className="absolute top-3 left-3">
@@ -59,10 +63,6 @@ export function ProjectCard({ project, index = 0 }: ProjectCardProps) {
             </Badge>
           </div>
 
-          {/* Decorative elements */}
-          <div className="w-20 h-20 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm flex items-center justify-center">
-            <span className="text-3xl font-bold text-white/40">{project.title.charAt(0)}</span>
-          </div>
         </div>
 
         <CardHeader className="pb-2">
