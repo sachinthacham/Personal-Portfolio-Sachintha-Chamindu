@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Clock, ArrowUpRight, Calendar } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -26,15 +26,9 @@ interface BlogCardProps {
 }
 
 export function BlogCard({ blog, index = 0 }: BlogCardProps) {
-  const gradient =
-    categoryColors[blog.category] ||
-    "from-primary/20 via-primary/10 to-primary/5";
-
-  const formattedDate = new Date(blog.publishedAt).toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
+  const gradient = categoryColors[blog.category] || "from-primary/20 via-primary/10 to-primary/5";
+  const isExternal = Boolean(blog.articleUrl);
+  const href = blog.articleUrl ?? `/blogs/${blog.id}`;
 
   return (
     <motion.div
@@ -48,16 +42,64 @@ export function BlogCard({ blog, index = 0 }: BlogCardProps) {
       }}
       className="h-full"
     >
-      <Link href={`/blogs/${blog.id}`} className="block h-full group">
+      {isExternal ? (
+        <a
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block h-full group"
+        >
+          <Card className="h-full flex flex-col overflow-hidden border-border/60 hover:border-primary/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5 cursor-pointer">
+            {/* Banner */}
+            <div className={`h-40 bg-linear-to-br ${gradient} relative overflow-hidden`}>
+              <img
+                src={blog.image}
+                alt={blog.title}
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-t from-black/35 to-transparent" />
+              <Badge
+                variant="secondary"
+                className="absolute left-4 bottom-4 z-10 text-xs bg-background/80 backdrop-blur-sm border border-border/50"
+              >
+                {blog.category}
+              </Badge>
+            </div>
+
+            <CardHeader className="pb-2">
+              <h3 className="text-base font-bold leading-snug group-hover:text-primary transition-colors duration-200 line-clamp-2">
+                {blog.title}
+              </h3>
+            </CardHeader>
+
+            <CardContent className="flex-1 pb-4">
+              <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed mb-4">
+                {blog.excerpt}
+              </p>
+            </CardContent>
+
+            <CardFooter className="pt-2 flex items-center justify-center">
+              <span className="text-xs font-medium text-primary flex items-center gap-1 group-hover:gap-1.5 transition-all duration-200">
+                Read on Medium
+                <ArrowUpRight className="w-3 h-3" />
+              </span>
+            </CardFooter>
+          </Card>
+        </a>
+      ) : (
+        <Link href={href} className="block h-full group">
         <Card className="h-full flex flex-col overflow-hidden border-border/60 hover:border-primary/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5 cursor-pointer">
           {/* Banner */}
-          <div
-            className={`h-40 bg-gradient-to-br ${gradient} relative overflow-hidden flex items-end p-4`}
-          >
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-black/30 to-transparent" />
+          <div className={`h-40 bg-linear-to-br ${gradient} relative overflow-hidden`}>
+            <img
+              src={blog.image}
+              alt={blog.title}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-t from-black/35 to-transparent" />
             <Badge
               variant="secondary"
-              className="relative z-10 text-xs bg-background/80 backdrop-blur-sm border border-border/50"
+              className="absolute left-4 bottom-4 z-10 text-xs bg-background/80 backdrop-blur-sm border border-border/50"
             >
               {blog.category}
             </Badge>
@@ -82,7 +124,8 @@ export function BlogCard({ blog, index = 0 }: BlogCardProps) {
             </span>
           </CardFooter>
         </Card>
-      </Link>
+        </Link>
+      )}
     </motion.div>
   );
 }
