@@ -135,7 +135,7 @@ export function Navbar() {
               <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
                 <Code2 className="w-4 h-4 text-primary-foreground" />
               </div>
-              <span className="font-bold text-base tracking-tight">
+              <span className="font-heading text-base font-semibold tracking-tight">
                 Sachintha<span className="text-primary">Chamindu</span>
               </span>
             </Link>
