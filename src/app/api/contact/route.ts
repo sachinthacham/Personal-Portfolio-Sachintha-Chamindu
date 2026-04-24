@@ -9,16 +9,28 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "All fields are required." }, { status: 400 });
     }
 
+    const gmailUser = process.env.GMAIL_USER?.trim();
+    // App passwords are often copied with spaces from Google UI.
+    const gmailAppPassword = process.env.GMAIL_APP_PASSWORD?.replace(/\s+/g, "").trim();
+
+    if (!gmailUser || !gmailAppPassword) {
+      console.error("Contact form mail config missing. Set GMAIL_USER and GMAIL_APP_PASSWORD.");
+      return NextResponse.json(
+        { error: "Email service is not configured yet. Please contact me via direct email." },
+        { status: 500 },
+      );
+    }
+
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: process.env.GMAIL_USER,
-        pass: process.env.GMAIL_APP_PASSWORD,
+        user: gmailUser,
+        pass: gmailAppPassword,
       },
     });
 
     await transporter.sendMail({
-      from: `"Portfolio Contact" <${process.env.GMAIL_USER}>`,
+      from: `"Portfolio Contact" <${gmailUser}>`,
       to: "sachinthachamindubal@gmail.com",
       replyTo: email,
       subject: `[Portfolio] ${subject}`,
