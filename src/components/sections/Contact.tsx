@@ -3,11 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Send, CheckCircle, Loader2 } from "lucide-react";
-import {
-  GithubIcon,
-  LinkedinIcon,
-  TwitterXIcon,
-} from "@/components/ui/SocialIcons";
+import { GithubIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -18,28 +14,27 @@ const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "hello@alexmorgan.dev",
-    href: "mailto:hello@alexmorgan.dev",
+    value: "sachinthachamindubal@gmail.com",
+    href: "mailto:sachinthachamindubal@gmail.com",
   },
   {
     icon: MapPin,
     label: "Location",
-    value: "San Francisco, CA",
+    value: "Chilaw, Sri Lanka",
     href: null,
   },
 ];
 
 const socialLinks = [
-  { icon: GithubIcon, href: "https://github.com/alexmorgan", label: "GitHub" },
   {
-    icon: LinkedinIcon,
-    href: "https://linkedin.com/in/alexmorgan",
-    label: "LinkedIn",
+    icon: GithubIcon,
+    href: "https://github.com/sachinthacham",
+    label: "GitHub",
   },
   {
-    icon: TwitterXIcon,
-    href: "https://twitter.com/alexmorgan",
-    label: "Twitter",
+    icon: LinkedinIcon,
+    href: "https://www.linkedin.com/in/sachinthacham/",
+    label: "LinkedIn",
   },
 ];
 
@@ -96,19 +91,15 @@ export function Contact() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
         <AnimatedSection className="text-center mb-16">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <div className="h-px w-10 bg-primary" />
-            <span className="text-sm font-semibold text-primary uppercase tracking-wider">
-              Contact
-            </span>
-            <div className="h-px w-10 bg-primary" />
+          <div className="flex items-center justify-center gap-3 mb-5">
+            <div className="h-px w-12 bg-gradient-to-r from-transparent to-primary/45" />
+            <span className="section-eyebrow">Contact</span>
+            <div className="h-px w-12 bg-gradient-to-l from-transparent to-primary/45" />
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-            Let&apos;s work together
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            I'm currently open to full-time roles, freelance projects, and
-            interesting collaborations.
+          <h2 className="section-title mb-5">Let&apos;s work together</h2>
+          <p className="section-lead">
+            I&apos;m open to full-time roles, freelance projects, and
+            collaborations that value craft, clarity, and long-term impact.
           </p>
         </AnimatedSection>
 
@@ -208,7 +199,7 @@ export function Contact() {
                         <Input
                           id="name"
                           name="name"
-                          placeholder="John Doe"
+                          placeholder="silva harry"
                           value={formState.name}
                           onChange={handleChange}
                           required
@@ -221,7 +212,7 @@ export function Contact() {
                           id="email"
                           name="email"
                           type="email"
-                          placeholder="john@example.com"
+                          placeholder="silva@gmail.com"
                           value={formState.email}
                           onChange={handleChange}
                           required
