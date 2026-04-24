@@ -1,13 +1,20 @@
 import Link from "next/link";
 import { Mail, Code2, ArrowUpRight } from "lucide-react";
-import { GithubIcon, LinkedinIcon, TwitterXIcon } from "@/components/ui/SocialIcons";
+import { GithubIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
 import { Separator } from "@/components/ui/separator";
 
 const socialLinks = [
-  { icon: GithubIcon, href: "https://github.com/alexmorgan", label: "GitHub" },
-  { icon: LinkedinIcon, href: "https://linkedin.com/in/alexmorgan", label: "LinkedIn" },
-  { icon: TwitterXIcon, href: "https://twitter.com/alexmorgan", label: "Twitter" },
-  { icon: Mail, href: "mailto:hello@alexmorgan.dev", label: "Email" },
+  {
+    icon: GithubIcon,
+    href: "https://github.com/sachinthacham",
+    label: "GitHub",
+  },
+  {
+    icon: LinkedinIcon,
+    href: "https://www.linkedin.com/in/sachinthacham/",
+    label: "LinkedIn",
+  },
+  { icon: Mail, href: "mailto:sachinthachamindubal@gmail.com", label: "Email" },
 ];
 
 const footerLinks = [
@@ -45,13 +52,14 @@ export function Footer() {
               <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
                 <Code2 className="w-4 h-4 text-primary-foreground" />
               </div>
-              <span className="font-bold text-base tracking-tight">
-                Alex<span className="text-primary">Morgan</span>
+              <span className="font-heading text-base font-semibold tracking-tight">
+                Sachintha<span className="text-primary">Chamindu</span>
               </span>
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed max-w-sm mb-6">
-              Full-stack software engineer passionate about building scalable, user-focused products
-              that make a difference. Open to exciting opportunities.
+              Full-stack engineer focused on scalable systems, thoughtful UX,
+              and software that holds up in production. Open to meaningful
+              opportunities.
             </p>
             <div className="flex items-center gap-2">
               {socialLinks.map(({ icon: Icon, href, label }) => (
@@ -72,7 +80,9 @@ export function Footer() {
           {/* Links */}
           {footerLinks.map((section) => (
             <div key={section.title}>
-              <h3 className="font-semibold text-sm mb-4">{section.title}</h3>
+              <h3 className="font-heading text-sm font-semibold tracking-tight mb-4">
+                {section.title}
+              </h3>
               <ul className="space-y-3">
                 {section.links.map((link) => (
                   <li key={link.label}>
@@ -95,13 +105,7 @@ export function Footer() {
         <Separator className="my-8" />
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-          <p>© {currentYear} Alex Morgan. All rights reserved.</p>
-          <p>
-            Built with{" "}
-            <span className="text-primary font-medium">Next.js</span>,{" "}
-            <span className="text-primary font-medium">Tailwind CSS</span> &{" "}
-            <span className="text-primary font-medium">shadcn/ui</span>
-          </p>
+          <p>© {currentYear} Sachintha Chamindu. All rights reserved.</p>
         </div>
       </div>
     </footer>
