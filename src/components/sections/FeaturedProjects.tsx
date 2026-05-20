@@ -22,8 +22,8 @@ export function FeaturedProjects() {
             Projects I&apos;m proud of
           </h2>
           <p className="section-lead">
-            A selection of my most impactful work — from AI-powered SaaS platforms to
-            distributed systems and developer tools.
+          A selection of projects focused on scalable web applications,
+          microservices, and modern developer tools.
           </p>
         </AnimatedSection>
 
