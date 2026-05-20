@@ -30,23 +30,24 @@ export function About() {
 
           {/* Bio */}
           <div className="section-lead mb-12 space-y-4 text-left sm:text-center">
-            <p>
-              I&apos;m a full-stack engineer with 3 years of experience building
-              modern web applications and AI-powered products. My work focuses
-              on scalable web development, clean architecture, and creating
-              reliable software that delivers real value.
-            </p>
-            <p>
-              Currently, I&apos;m an undergraduate at the{" "}
-              <span className="text-foreground font-semibold">
-                University of Moratuwa
-              </span>
-              , where I continue to deepen my knowledge in software engineering
-              while actively building real-world projects. I care deeply about
-              clean code, great developer experience, and shipping products that
-              actually make an impact.
-            </p>
-          </div>
+  <p>
+    I&apos;m a full-stack engineer with 3 years of experience building
+    modern web applications and scalable backend systems. My work focuses
+    on clean architecture, distributed systems, and creating reliable
+    software that delivers real value.
+  </p>
+
+  <p>
+    Currently, I&apos;m an undergraduate at the{" "}
+    <span className="text-foreground font-semibold">
+      University of Moratuwa
+    </span>
+    , where I continue to deepen my knowledge in software engineering
+    while actively building real-world projects. I care deeply about
+    clean code, great developer experience, and shipping products that
+    actually make an impact.
+  </p>
+</div>
         </AnimatedSection>
 
         {/* Stats + CV download */}
