@@ -82,8 +82,9 @@ export function Hero() {
                 Sachintha Chamindu
               </span>
               , a Full-Stack Engineer with 3 years of experience building
-              scalable web applications and AI-powered products, passionate
-              about clean code and building products that create real impact.
+scalable web applications, distributed systems, and
+microservice-based applications, passionate about building
+reliable software and products that create real impact.
             </motion.p>
 
             {/* CTAs */}
