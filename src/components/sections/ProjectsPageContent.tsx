@@ -47,8 +47,7 @@ export function ProjectsPageContent() {
               All <span className="gradient-text">Projects</span>
             </h1>
             <p className="section-lead mx-0 text-left max-w-2xl">
-              A complete collection of projects I&apos;ve built — spanning SaaS platforms, DevOps tools,
-              AI applications, and more.
+              A complete collection of projects I&apos;ve built
             </p>
           </AnimatedSection>
         </div>
