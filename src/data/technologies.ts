@@ -6,7 +6,7 @@ export interface Technology {
 
 export const technologies: Technology[] = [
   // Languages
-  { name: "Java",        category: "Languages", icon: "java"       },
+  
   { name: "C#",          category: "Languages", icon: "csharp"     },
   { name: "JavaScript",  category: "Languages", icon: "javascript" },
   { name: "TypeScript",  category: "Languages", icon: "typescript" },
@@ -18,9 +18,11 @@ export const technologies: Technology[] = [
   { name: "Redux",       category: "Frontend",  icon: "redux"      },
 
   // Backend
-  { name: "Node.js",     category: "Backend",   icon: "nodejs"     },
-  { name: "NestJS",      category: "Backend",   icon: "nestjs"     },
   { name: "ASP.NET",     category: "Backend",   icon: "aspnet"     },
+  { name: "NestJS",      category: "Backend",   icon: "nestjs"     },
+  { name: "Node.js",     category: "Backend",   icon: "nodejs"     },
+  
+  
 
   // Database
   { name: "MSSQL",       category: "Database",  icon: "mssql"      },
@@ -31,6 +33,7 @@ export const technologies: Technology[] = [
   { name: "Docker",      category: "DevOps",    icon: "docker"     },
   { name: "CI/CD",       category: "DevOps",    icon: "cicd"       },
   { name: "AWS",         category: "DevOps",    icon: "aws"        },
+  { name: "Azure",         category: "DevOps",    icon: "azure"        },
 ];
 
 export const techCategories = ["All", "Languages", "Frontend", "Backend", "Database", "DevOps"];
