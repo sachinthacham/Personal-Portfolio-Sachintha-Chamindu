@@ -16,6 +16,7 @@ const projectColors: Record<string, string> = {
   "Productivity": "from-pink-500/20 via-rose-500/10 to-red-500/20",
   "ML/AI": "from-purple-500/20 via-violet-500/10 to-indigo-500/20",
   "Web3": "from-blue-500/20 via-indigo-500/10 to-violet-500/20",
+  "Logistics": "from-orange-500/20 via-amber-500/10 to-sky-500/20",
 };
 
 interface ProjectCardProps {
