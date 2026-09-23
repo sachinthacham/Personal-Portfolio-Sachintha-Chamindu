@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
 
@@ -48,9 +49,13 @@ export function Footer() {
           {/* Brand */}
           <div className="sm:col-span-2">
             <Link href="/" className="mb-4 flex w-fit items-center gap-2.5 rounded-md">
-              <span className="flex size-8 items-center justify-center rounded-lg bg-primary text-[0.8rem] font-bold tracking-tight text-primary-foreground">
-                SC
-              </span>
+              <Image
+                src="/logo-square.png"
+                alt=""
+                width={32}
+                height={32}
+                className="size-8 rounded-lg object-cover ring-1 ring-border"
+              />
               <span className="font-heading text-[0.95rem] font-semibold tracking-tight">
                 Sachintha<span className="text-primary">Chamindu</span>
               </span>

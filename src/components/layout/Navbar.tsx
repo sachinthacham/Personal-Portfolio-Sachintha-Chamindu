@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -136,9 +137,13 @@ export function Navbar() {
               className="group flex items-center gap-2.5 rounded-md"
               aria-label="Sachintha Chamindu — home"
             >
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-[0.8rem] font-bold tracking-tight text-primary-foreground transition-transform duration-200 group-hover:-translate-y-px">
-                SC
-              </span>
+              <Image
+                src="/logo-square.png"
+                alt=""
+                width={32}
+                height={32}
+                className="size-8 rounded-lg object-cover ring-1 ring-border transition-transform duration-200 group-hover:-translate-y-px"
+              />
               <span className="font-heading text-[0.95rem] font-semibold tracking-tight text-foreground">
                 Sachintha<span className="text-primary">Chamindu</span>
               </span>

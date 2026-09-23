@@ -30,9 +30,12 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Sachintha Chamindu" }],
   icons: {
-    icon: "/hero-removebg.png?v=5",
-    shortcut: "/hero-removebg.png?v=5",
-    apple: "/hero-removebg.png?v=5",
+    icon: [
+      { url: "/favicon.png", type: "image/png", sizes: "64x64" },
+      { url: "/logo-square.png", type: "image/png", sizes: "512x512" },
+    ],
+    shortcut: "/favicon.png",
+    apple: "/apple-touch-icon.png",
   },
   openGraph: {
     title: "Sachintha Chamindu",
@@ -53,11 +56,6 @@ export default function RootLayout({
       suppressHydrationWarning
       className={`${inter.variable} ${jakarta.variable}`}
     >
-      <head>
-        <link rel="icon" type="image/png" sizes="32x32" href="/hero-removebg.png?v=5" />
-        <link rel="shortcut icon" type="image/png" href="/hero-removebg.png?v=5" />
-        <link rel="apple-touch-icon" href="/hero-removebg.png?v=5" />
-      </head>
       <body className="min-h-screen antialiased font-sans">
         <ThemeProvider
           attribute="class"
