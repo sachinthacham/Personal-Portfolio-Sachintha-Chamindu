@@ -17,6 +17,34 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: "rgb-fusion-engine",
+    title: "RGB Based Fusion Engine",
+    description:
+      "An adaptive image fusion engine that combines EDSR and SRGAN super-resolution outputs to produce sharper, more detailed Sentinel-2 satellite imagery of coastal regions.",
+    longDescription:
+      "The RGB Based Fusion Engine improves low-resolution Sentinel-2 satellite imagery for coastal and shoreline analysis. Sentinel-2 scenes are split into patches and upscaled 4x (64×64 to 256×256) with two super-resolution models: EDSR, which preserves structure and accurate colour, and SRGAN, which recovers realistic high-frequency texture. Rather than choosing one model, the engine fuses both adaptively, pixel by pixel. It builds a water mask from HSV channel analysis, draws a buffer zone along the shoreline, and uses local texture variance to split land into textured and smooth regions. Each region then takes the best pixels from EDSR or SRGAN with its own fusion weights. A sensitivity analysis tests combinations of buffer size, texture threshold, and fusion weights, and keeps the combination with the lowest MAE and RMSE.",
+    keyFeatures: [
+      "4x super-resolution of Sentinel-2 patches using both EDSR and SRGAN models",
+      "HSV channel analysis to generate an accurate water/land mask",
+      "Region classification into shoreline buffer, textured land, and smooth land",
+      "Local texture variance analysis to guide region-specific pixel selection",
+      "Adaptive pixel-level RGB fusion that combines EDSR structure with SRGAN detail",
+      "Sensitivity analysis and parameter optimisation evaluated with MAE and RMSE",
+    ],
+    galleryImages: [
+      "/projects/rgb-fusion/01-enhancement-results.png",
+      "/projects/rgb-fusion/02-adaptive-fusion-pipeline.png",
+      "/projects/rgb-fusion/03-hsv-water-mask.png",
+      "/projects/rgb-fusion/04-region-classification-fusion.png",
+    ],
+    showGallery: true,
+    image: "/projects/cover-images/rgb-fusion-engine.png",
+    tags: ["Python", "EDSR", "SRGAN", "Sentinel-2", "Computer Vision"],
+    featured: false,
+    category: "ML/AI",
+    year: "2026",
+  },
+  {
     id: "supportiq-ai-customer-support",
     title: "SupportIQ - AI-Powered Customer Support",
     description:
