@@ -14,7 +14,7 @@ const socialLinks = [
     href: "https://www.linkedin.com/in/sachinthacham/",
     label: "LinkedIn",
   },
-  { icon: Mail, href: "mailto:sachinthachamindubal@gmail.com", label: "Email" },
+  { icon: Mail, href: "mailto:sachinthachamindu.dev@gmail.com", label: "Email" },
 ];
 
 const footerLinks = [

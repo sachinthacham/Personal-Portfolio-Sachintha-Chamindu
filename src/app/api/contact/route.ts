@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
 
     await transporter.sendMail({
       from: `"Portfolio Contact" <${gmailUser}>`,
-      to: "sachinthachamindubal@gmail.com",
+      to: "sachinthachamindu.dev@gmail.com",
       replyTo: email,
       subject: `[Portfolio] ${subject}`,
       html: `

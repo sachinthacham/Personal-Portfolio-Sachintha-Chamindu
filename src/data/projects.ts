@@ -18,6 +18,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: "rgb-fusion-engine",
+    githubUrl: "https://github.com/sachinthacham/RGB-Based-Fusion-Engine",
     title: "RGB Based Fusion Engine",
     description:
       "An adaptive image fusion engine that combines EDSR and SRGAN super-resolution outputs to produce sharper, more detailed Sentinel-2 satellite imagery of coastal regions.",
@@ -46,6 +47,7 @@ export const projects: Project[] = [
   },
   {
     id: "supportiq-ai-customer-support",
+    githubUrl: "https://github.com/sachinthacham/AI-Powered-Customer-Support",
     title: "SupportIQ - AI-Powered Customer Support",
     description:
       "An AI help-desk that triages support tickets, escalates uncertain cases to humans, and answers policy questions from the company knowledge base with cited sources.",
@@ -74,6 +76,7 @@ export const projects: Project[] = [
   },
   {
     id: "recruitpro-recruitment-platform",
+    githubUrl: "https://github.com/sachinthacham/RecruitPro-Job-Recruitment-Platform",
     title: "RecruitPro - Job Recruitment Platform",
     description:
       "A multi-tenant recruitment platform covering the full hiring pipeline, from job posting and applications to interviews and offers.",
@@ -107,6 +110,7 @@ export const projects: Project[] = [
   },
   {
     id: "swiftship-package-delivery",
+    githubUrl: "https://github.com/sachinthacham/SwiftShip-package-delivery",
     title: "SwiftShip - Package Delivery System",
     description:
       "A microservices-based courier platform with customer, courier, and dispatcher portals, live shipment tracking, and nearest-driver auto-assignment.",
