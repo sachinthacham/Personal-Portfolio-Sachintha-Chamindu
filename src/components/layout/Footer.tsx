@@ -1,7 +1,6 @@
 import Link from "next/link";
-import { Mail, Code2, ArrowUpRight } from "lucide-react";
+import { Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
-import { Separator } from "@/components/ui/separator";
 
 const socialLinks = [
   {
@@ -43,20 +42,20 @@ export function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-muted/30 border-t border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+    <footer className="border-t border-border bg-surface">
+      <div className="container-page py-14">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 md:grid-cols-4">
           {/* Brand */}
-          <div className="md:col-span-2">
-            <Link href="/" className="flex items-center gap-2 mb-4 w-fit">
-              <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
-                <Code2 className="w-4 h-4 text-primary-foreground" />
-              </div>
-              <span className="font-heading text-base font-semibold tracking-tight">
+          <div className="sm:col-span-2">
+            <Link href="/" className="mb-4 flex w-fit items-center gap-2.5 rounded-md">
+              <span className="flex size-8 items-center justify-center rounded-lg bg-primary text-[0.8rem] font-bold tracking-tight text-primary-foreground">
+                SC
+              </span>
+              <span className="font-heading text-[0.95rem] font-semibold tracking-tight">
                 Sachintha<span className="text-primary">Chamindu</span>
               </span>
             </Link>
-            <p className="text-muted-foreground text-sm leading-relaxed max-w-sm mb-6">
+            <p className="mb-6 max-w-sm text-sm leading-relaxed text-muted-foreground">
               Full-stack engineer focused on scalable systems, thoughtful UX,
               and software that holds up in production. Open to meaningful
               opportunities.
@@ -69,9 +68,9 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-9 h-9 rounded-lg bg-muted flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors duration-200"
+                  className="flex size-9 items-center justify-center rounded-full border border-border bg-card text-muted-foreground transition-colors duration-200 hover:border-primary/40 hover:text-primary"
                 >
-                  <Icon className="w-4 h-4" />
+                  <Icon className="size-4" />
                 </a>
               ))}
             </div>
@@ -79,32 +78,27 @@ export function Footer() {
 
           {/* Links */}
           {footerLinks.map((section) => (
-            <div key={section.title}>
-              <h3 className="font-heading text-sm font-semibold tracking-tight mb-4">
+            <nav key={section.title} aria-label={section.title}>
+              <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-foreground">
                 {section.title}
               </h3>
-              <ul className="space-y-3">
+              <ul className="space-y-2.5">
                 {section.links.map((link) => (
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200 flex items-center gap-1 group"
+                      className="text-sm text-muted-foreground transition-colors duration-200 hover:text-primary"
                     >
                       {link.label}
-                      {link.href.startsWith("http") && (
-                        <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-                      )}
                     </Link>
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
           ))}
         </div>
 
-        <Separator className="my-8" />
-
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
+        <div className="mt-12 border-t border-border pt-6 text-sm text-muted-foreground">
           <p>© {currentYear} Sachintha Chamindu. All rights reserved.</p>
         </div>
       </div>

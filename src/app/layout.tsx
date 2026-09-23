@@ -1,22 +1,19 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Body copy
+const inter = Inter({
+  variable: "--font-body",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// Headings
+const jakarta = Plus_Jakarta_Sans({
+  variable: "--font-display",
   subsets: ["latin"],
-});
-
-const playfair = Playfair_Display({
-  variable: "--font-instrument",
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
   display: "swap",
 });
 
@@ -54,7 +51,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable}`}
+      className={`${inter.variable} ${jakarta.variable}`}
     >
       <head>
         <link rel="icon" type="image/png" sizes="32x32" href="/hero-removebg.png?v=5" />
@@ -64,7 +61,7 @@ export default function RootLayout({
       <body className="min-h-screen antialiased font-sans">
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
         >

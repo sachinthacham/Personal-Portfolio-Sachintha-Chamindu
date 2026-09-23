@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { projects } from "@/data/projects";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { ArrowLeft, ExternalLink, Calendar, Tag } from "lucide-react";
+import { ArrowLeft, ExternalLink, Calendar, Tag, ArrowUpRight } from "lucide-react";
 import { GithubIcon } from "@/components/ui/SocialIcons";
 
 interface Props {
@@ -28,6 +28,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+function SidebarCard({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="rounded-xl border border-border bg-card p-5 shadow-soft">
+      <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+        {title}
+      </h2>
+      {children}
+    </div>
+  );
+}
+
 export default async function ProjectPage({ params }: Props) {
   const { slug } = await params;
   const project = projects.find((p) => p.id === slug);
@@ -37,115 +48,80 @@ export default async function ProjectPage({ params }: Props) {
     .filter((p) => p.id !== project.id && p.category === project.category)
     .slice(0, 2);
 
-  const projectColors: Record<string, string> = {
-    SaaS: "from-violet-500/20 via-primary/10 to-cyan-500/20",
-    "E-Commerce": "from-emerald-500/20 via-teal-500/10 to-cyan-500/20",
-    DevOps: "from-orange-500/20 via-amber-500/10 to-yellow-500/20",
-    Productivity: "from-pink-500/20 via-rose-500/10 to-red-500/20",
-    "ML/AI": "from-purple-500/20 via-violet-500/10 to-indigo-500/20",
-    Web3: "from-blue-500/20 via-indigo-500/10 to-violet-500/20",
-    Logistics: "from-orange-500/20 via-amber-500/10 to-sky-500/20",
-  };
-
-  const gradient =
-    projectColors[project.category] ||
-    "from-primary/20 via-primary/10 to-primary/5";
-
   return (
     <>
       <Navbar />
       <main className="pt-16">
-        {/* Banner */}
-        <div className={`h-64 sm:h-80 bg-linear-to-br ${gradient} relative flex items-center justify-center overflow-hidden`}>
-          <img
-            src={project.image}
-            alt={project.title}
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black/25" />
-          <div className="absolute inset-0 bg-linear-to-t from-background/65 to-transparent" />
-        </div>
-
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <Button
-            asChild
-            variant="ghost"
-            size="sm"
-            className="gap-2 mb-8 -ml-2 text-muted-foreground"
-          >
+        <div className="container-page py-10 sm:py-14">
+          <Button asChild variant="ghost" size="sm" className="-ml-3 mb-8">
             <Link href="/projects">
-              <ArrowLeft className="w-4 h-4" />
+              <ArrowLeft className="size-4" />
               All Projects
             </Link>
           </Button>
 
           {/* Header */}
-          <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <Badge variant="secondary" className="text-xs">
-                  {project.category}
-                </Badge>
-                <Badge variant="outline" className="text-xs">
-                  {project.year}
-                </Badge>
-                {project.featured && (
-                  <Badge className="text-xs bg-primary/10 text-primary border-primary/20">
-                    Featured
-                  </Badge>
+          <header className="max-w-3xl">
+            <div className="mb-4 flex flex-wrap items-center gap-2">
+              <Badge variant="secondary">{project.category}</Badge>
+              <Badge variant="outline">{project.year}</Badge>
+              {project.featured && (
+                <Badge className="border-primary/20 bg-accent text-accent-foreground">Featured</Badge>
+              )}
+            </div>
+            <h1 className="font-heading text-3xl font-bold tracking-[-0.015em] text-foreground sm:text-4xl md:text-[2.75rem] md:leading-[1.12]">
+              {project.title}
+            </h1>
+            <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
+              {project.description}
+            </p>
+            {(project.githubUrl || project.liveUrl) && (
+              <div className="mt-7 flex flex-wrap items-center gap-3">
+                {project.liveUrl && (
+                  <Button asChild>
+                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                      <ExternalLink className="size-4" />
+                      Live Demo
+                    </a>
+                  </Button>
+                )}
+                {project.githubUrl && (
+                  <Button asChild variant="outline">
+                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                      <GithubIcon className="size-4" />
+                      Source Code
+                    </a>
+                  </Button>
                 )}
               </div>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight">
-                {project.title}
-              </h1>
-            </div>
-            <div className="flex items-center gap-2 flex-wrap">
-              {project.githubUrl && (
-                <Button asChild variant="outline" size="sm" className="gap-2">
-                  <a
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <GithubIcon className="w-4 h-4" />
-                    Source Code
-                  </a>
-                </Button>
-              )}
-              {project.liveUrl && (
-                <Button asChild size="sm" className="gap-2">
-                  <a
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <ExternalLink className="w-4 h-4" />
-                    Live Demo
-                  </a>
-                </Button>
-              )}
-            </div>
+            )}
+          </header>
+
+          {/* Cover */}
+          <div className="relative mt-10 aspect-video overflow-hidden rounded-2xl border border-border bg-muted shadow-soft sm:aspect-21/9">
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              preload
+              sizes="(min-width: 1152px) 1088px, 100vw"
+              className="object-cover object-left"
+            />
           </div>
 
-          <p className="text-xl text-muted-foreground leading-relaxed mb-8">
-            {project.description}
-          </p>
-
-          <Separator className="mb-8" />
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+          <div className="mt-12 grid grid-cols-1 gap-10 lg:grid-cols-[1fr_18rem] lg:gap-14">
             {/* Main content */}
-            <div className="lg:col-span-2 space-y-8">
-              <div>
-                <h2 className="text-xl font-bold mb-4">Overview</h2>
-                <p className="text-muted-foreground leading-relaxed">
+            <div className="min-w-0 space-y-12">
+              <section>
+                <h2 className="mb-4 text-xl font-semibold text-foreground">Overview</h2>
+                <p className="prose-measure text-base leading-[1.75] text-muted-foreground sm:text-[1.0625rem]">
                   {project.longDescription}
                 </p>
-              </div>
+              </section>
 
-              <div>
-                <h2 className="text-xl font-bold mb-4">Key Features</h2>
-                <ul className="space-y-3">
+              <section>
+                <h2 className="mb-4 text-xl font-semibold text-foreground">Key Features</h2>
+                <ul className="prose-measure space-y-3">
                   {(
                     project.keyFeatures ?? [
                       "Scalable architecture designed for high-traffic production environments",
@@ -157,40 +133,41 @@ export default async function ProjectPage({ params }: Props) {
                   ).map((feature, i) => (
                     <li
                       key={i}
-                      className="flex items-start gap-3 text-sm text-muted-foreground"
+                      className="flex items-start gap-3 text-[0.95rem] leading-relaxed text-muted-foreground"
                     >
-                      <div className="w-1.5 h-1.5 bg-primary rounded-full mt-1.5 shrink-0" />
+                      <span aria-hidden="true" className="mt-2.5 size-1.5 shrink-0 rounded-full bg-primary" />
                       {feature}
                     </li>
                   ))}
                 </ul>
-              </div>
+              </section>
 
               {project.galleryImages !== undefined && project.showGallery !== false && (
-                <div>
-                  <h2 className="text-xl font-bold mb-4">Image Gallery</h2>
+                <section>
+                  <h2 className="mb-4 text-xl font-semibold text-foreground">Image Gallery</h2>
 
                   {project.galleryImages.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                       {project.galleryImages.map((imgPath, index) => (
                         <a
                           key={`${imgPath}-${index}`}
                           href={imgPath}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="group block overflow-hidden rounded-xl border border-border/60 bg-muted/20"
+                          className="group relative block aspect-video overflow-hidden rounded-xl border border-border bg-muted"
                         >
-                          <img
+                          <Image
                             src={imgPath}
                             alt={`${project.title} screenshot ${index + 1}`}
-                            className="h-48 w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                            loading="lazy"
+                            fill
+                            sizes="(min-width: 1024px) 400px, (min-width: 640px) 50vw, 100vw"
+                            className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                           />
                         </a>
                       ))}
                     </div>
                   ) : (
-                    <div className="rounded-xl border border-dashed border-border/70 bg-muted/20 px-4 py-5">
+                    <div className="rounded-xl border border-dashed border-border bg-muted/40 px-4 py-5">
                       <p className="text-sm text-muted-foreground">
                         Add project screenshots by uploading images to{" "}
                         <span className="font-medium text-foreground">/public/projects</span>{" "}
@@ -201,100 +178,80 @@ export default async function ProjectPage({ params }: Props) {
                       </p>
                     </div>
                   )}
-                </div>
+                </section>
               )}
             </div>
 
             {/* Sidebar */}
-            <div className="space-y-6">
-              <div className="bg-muted/30 border border-border/60 rounded-xl p-5">
-                <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">
-                  Project Info
-                </h3>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-2 text-sm">
-                    <Calendar className="w-4 h-4 text-primary" />
-                    <span className="text-muted-foreground">Year:</span>
-                    <span className="font-medium">{project.year}</span>
+            <aside className="space-y-5 lg:sticky lg:top-24 lg:self-start">
+              <SidebarCard title="Project Info">
+                <dl className="space-y-3 text-sm">
+                  <div className="flex items-center gap-2">
+                    <Calendar className="size-4 text-primary" />
+                    <dt className="text-muted-foreground">Year:</dt>
+                    <dd className="font-medium text-foreground">{project.year}</dd>
                   </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <Tag className="w-4 h-4 text-primary" />
-                    <span className="text-muted-foreground">Category:</span>
-                    <span className="font-medium">{project.category}</span>
+                  <div className="flex items-center gap-2">
+                    <Tag className="size-4 text-primary" />
+                    <dt className="text-muted-foreground">Category:</dt>
+                    <dd className="font-medium text-foreground">{project.category}</dd>
                   </div>
-                </div>
-              </div>
+                </dl>
+              </SidebarCard>
 
-              <div className="bg-muted/30 border border-border/60 rounded-xl p-5">
-                <h3 className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">
-                  Tech Stack
-                </h3>
-                <div className="flex flex-wrap gap-2">
+              <SidebarCard title="Tech Stack">
+                <div className="flex flex-wrap gap-1.5">
                   {project.tags.map((tag) => (
-                    <Badge
-                      key={tag}
-                      variant="secondary"
-                      className="text-xs border border-border/40"
-                    >
+                    <Badge key={tag} variant="secondary" className="font-normal">
                       {tag}
                     </Badge>
                   ))}
                 </div>
-              </div>
+              </SidebarCard>
 
-              <div className="flex flex-col gap-2">
-                {project.githubUrl && (
-                  <Button asChild variant="outline" className="gap-2 w-full">
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <GithubIcon className="w-4 h-4" />
-                      View on GitHub
-                    </a>
-                  </Button>
-                )}
-                {project.liveUrl && (
-                  <Button asChild className="gap-2 w-full">
-                    <a
-                      href={project.liveUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <ExternalLink className="w-4 h-4" />
-                      Live Demo
-                    </a>
-                  </Button>
-                )}
-              </div>
-            </div>
+              {(project.githubUrl || project.liveUrl) && (
+                <div className="flex flex-col gap-2">
+                  {project.githubUrl && (
+                    <Button asChild variant="outline" className="w-full">
+                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                        <GithubIcon className="size-4" />
+                        View on GitHub
+                      </a>
+                    </Button>
+                  )}
+                  {project.liveUrl && (
+                    <Button asChild className="w-full">
+                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                        <ExternalLink className="size-4" />
+                        Live Demo
+                      </a>
+                    </Button>
+                  )}
+                </div>
+              )}
+            </aside>
           </div>
 
           {/* Related projects */}
           {relatedProjects.length > 0 && (
-            <div className="mt-16">
-              <Separator className="mb-12" />
-              <h2 className="text-2xl font-bold mb-6">Related Projects</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <section className="mt-20 border-t border-border pt-12">
+              <h2 className="mb-6 text-2xl font-semibold text-foreground">Related Projects</h2>
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                 {relatedProjects.map((related) => (
                   <Link
                     key={related.id}
                     href={`/projects/${related.id}`}
-                    className="group block bg-card border border-border/60 rounded-xl p-5 hover:border-primary/40 transition-all duration-200 hover:-translate-y-1"
+                    className="group block rounded-xl border border-border bg-card p-5 shadow-soft transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-1 hover:border-foreground/15 hover:shadow-lift"
                   >
-                    <Badge variant="secondary" className="text-xs mb-3">
-                      {related.category}
-                    </Badge>
-                    <h3 className="font-semibold group-hover:text-primary transition-colors mb-2">
+                    <p className="mb-2 text-xs font-medium text-primary">{related.category}</p>
+                    <h3 className="flex items-start justify-between gap-3 font-semibold text-foreground">
                       {related.title}
+                      <ArrowUpRight className="mt-0.5 size-4 shrink-0 text-muted-foreground transition-colors group-hover:text-primary" />
                     </h3>
-                    <p className="text-sm text-muted-foreground line-clamp-2">
-                      {related.description}
-                    </p>
-                    <div className="flex flex-wrap gap-1.5 mt-3">
+                    <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{related.description}</p>
+                    <div className="mt-4 flex flex-wrap gap-1.5">
                       {related.tags.slice(0, 3).map((tag) => (
-                        <Badge key={tag} variant="outline" className="text-xs">
+                        <Badge key={tag} variant="outline" className="font-normal">
                           {tag}
                         </Badge>
                       ))}
@@ -302,7 +259,7 @@ export default async function ProjectPage({ params }: Props) {
                   </Link>
                 ))}
               </div>
-            </div>
+            </section>
           )}
         </div>
       </main>

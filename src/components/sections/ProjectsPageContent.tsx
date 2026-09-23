@@ -1,22 +1,29 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { AnimatedSection, StaggerContainer } from "@/components/ui/AnimatedSection";
+import { PageHeader } from "@/components/ui/PageHeader";
+import { FilterPill } from "@/components/ui/FilterPill";
 import { ProjectCard } from "@/components/cards/ProjectCard";
 import { projects } from "@/data/projects";
 
 const categories = ["All", ...Array.from(new Set(projects.map((p) => p.category)))];
 
+// Featured projects first; otherwise keep the order from the data file
+const orderedProjects = [
+  ...projects.filter((p) => p.featured),
+  ...projects.filter((p) => !p.featured),
+];
+
 export function ProjectsPageContent() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [search, setSearch] = useState("");
 
-  const filtered = projects.filter((project) => {
+  const filtered = orderedProjects.filter((project) => {
     const matchesCategory = activeCategory === "All" || project.category === activeCategory;
     const matchesSearch =
       search === "" ||
@@ -28,92 +35,67 @@ export function ProjectsPageContent() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative py-20 sm:py-28 overflow-hidden">
-        <div className="absolute inset-0 hero-glow pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection>
-            <Button asChild variant="ghost" size="sm" className="gap-2 mb-8 -ml-2 text-muted-foreground">
-              <Link href="/">
-                <ArrowLeft className="w-4 h-4" />
-                Back to Home
-              </Link>
-            </Button>
-            <div className="flex items-center gap-3 mb-5">
-              <div className="h-px w-12 bg-gradient-to-r from-transparent to-primary/45" />
-              <span className="section-eyebrow">Portfolio</span>
-            </div>
-            <h1 className="font-heading text-4xl sm:text-5xl font-semibold mb-5 leading-[1.08] tracking-tight">
-              All <span className="gradient-text">Projects</span>
-            </h1>
-            <p className="section-lead mx-0 text-left max-w-2xl">
-              A complete collection of projects I&apos;ve built
-            </p>
-          </AnimatedSection>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="Portfolio"
+        title="All Projects"
+        lead={<>A complete collection of projects I&apos;ve built</>}
+      />
 
-      {/* Content */}
-      <section className="pb-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-12 sm:py-16">
+        <div className="container-page">
           {/* Filters */}
-          <AnimatedSection delay={0.1} className="flex flex-col sm:flex-row gap-4 mb-10">
-            <div className="relative flex-1 max-w-sm">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+          <AnimatedSection delay={0.05} className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-center">
+            <div className="relative w-full lg:max-w-xs">
+              <Search className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
               <Input
+                type="search"
+                aria-label="Search projects"
                 placeholder="Search projects..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="pl-9 bg-muted/50"
+                className="h-10 rounded-lg bg-card pl-10 text-[0.95rem]"
               />
             </div>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2" role="group" aria-label="Filter by category">
               {categories.map((cat) => (
-                <button
+                <FilterPill
                   key={cat}
+                  label={cat}
+                  active={activeCategory === cat}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
-                    activeCategory === cat
-                      ? "bg-primary text-primary-foreground shadow-md shadow-primary/20"
-                      : "bg-muted text-muted-foreground hover:text-foreground border border-border/50"
-                  }`}
-                >
-                  {cat}
-                </button>
+                />
               ))}
             </div>
           </AnimatedSection>
 
           {/* Count */}
-          <AnimatedSection delay={0.15} className="mb-6">
-            <p className="text-sm text-muted-foreground">
-              Showing <span className="font-semibold text-foreground">{filtered.length}</span> of{" "}
-              <span className="font-semibold text-foreground">{projects.length}</span> projects
-            </p>
-          </AnimatedSection>
+          <p className="mb-6 text-sm text-muted-foreground" aria-live="polite">
+            Showing <span className="font-semibold text-foreground">{filtered.length}</span> of{" "}
+            <span className="font-semibold text-foreground">{projects.length}</span> projects
+          </p>
 
           {/* Grid */}
           <AnimatePresence mode="wait">
             <motion.div
               key={`${activeCategory}-${search}`}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
             >
               {filtered.length > 0 ? (
-                <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <StaggerContainer className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
                   {filtered.map((project, i) => (
                     <ProjectCard key={project.id} project={project} index={i} />
                   ))}
                 </StaggerContainer>
               ) : (
-                <div className="text-center py-20">
+                <div className="rounded-xl border border-dashed border-border py-20 text-center">
                   <p className="text-muted-foreground">No projects match your search.</p>
                   <Button
-                    variant="ghost"
+                    variant="outline"
                     size="sm"
-                    className="mt-3"
+                    className="mt-4"
                     onClick={() => {
                       setSearch("");
                       setActiveCategory("All");
