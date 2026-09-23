@@ -5,44 +5,32 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ProjectCard } from "@/components/cards/ProjectCard";
 import { AnimatedSection, StaggerContainer } from "@/components/ui/AnimatedSection";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 import { featuredProjects } from "@/data/projects";
 
 export function FeaturedProjects() {
   return (
-    <section id="projects" className="py-24 sm:py-32 bg-muted/20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
-        <AnimatedSection className="text-center mb-16">
-          <div className="flex items-center justify-center gap-3 mb-5">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-primary/45" />
-            <span className="section-eyebrow">Featured Work</span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-primary/45" />
-          </div>
-          <h2 className="section-title mb-5">
-            Projects I&apos;m proud of
-          </h2>
-          <p className="section-lead">
-          A selection of projects focused on scalable web applications,
-          microservices, and modern developer tools.
-          </p>
+    <section id="projects" className="section border-y border-border bg-surface">
+      <div className="container-page">
+        <AnimatedSection className="mb-12 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <SectionHeading
+            eyebrow="Featured Work"
+            title="Projects I'm proud of"
+            lead="A selection of projects focused on scalable web applications, microservices, and modern developer tools."
+          />
+          <Button asChild variant="outline" className="group w-fit shrink-0">
+            <Link href="/projects">
+              View All Projects
+              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+            </Link>
+          </Button>
         </AnimatedSection>
 
-        {/* Cards grid */}
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <StaggerContainer className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {featuredProjects.map((project, i) => (
             <ProjectCard key={project.id} project={project} index={i} />
           ))}
         </StaggerContainer>
-
-        {/* CTA */}
-        <AnimatedSection className="text-center">
-          <Button asChild variant="outline" size="lg" className="gap-2">
-            <Link href="/projects">
-              View All Projects
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-          </Button>
-        </AnimatedSection>
       </div>
     </section>
   );

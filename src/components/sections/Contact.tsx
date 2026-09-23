@@ -2,13 +2,14 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, MapPin, Send, CheckCircle, Loader2 } from "lucide-react";
+import { Mail, MapPin, Send, CheckCircle, Loader2, AlertCircle } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { AnimatedSection } from "@/components/ui/AnimatedSection";
+import { SectionHeading } from "@/components/ui/SectionHeading";
 
 const contactInfo = [
   {
@@ -37,6 +38,9 @@ const socialLinks = [
     label: "LinkedIn",
   },
 ];
+
+const fieldClass =
+  "h-11 rounded-lg border-input bg-background px-3.5 text-[0.95rem] focus-visible:border-primary focus-visible:ring-primary/20";
 
 export function Contact() {
   const [formState, setFormState] = useState({
@@ -87,95 +91,85 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 sm:py-32">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
-        <AnimatedSection className="text-center mb-16">
-          <div className="flex items-center justify-center gap-3 mb-5">
-            <div className="h-px w-12 bg-gradient-to-r from-transparent to-primary/45" />
-            <span className="section-eyebrow">Contact</span>
-            <div className="h-px w-12 bg-gradient-to-l from-transparent to-primary/45" />
-          </div>
-          <h2 className="section-title mb-5">Let&apos;s work together</h2>
-          <p className="section-lead">
-            I&apos;m open to full-time roles, freelance projects, and
-            collaborations that value craft, clarity, and long-term impact.
-          </p>
-        </AnimatedSection>
+    <section id="contact" className="section">
+      <div className="container-page">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+          {/* Left: intro + details */}
+          <AnimatedSection>
+            <SectionHeading
+              eyebrow="Contact"
+              title="Let's work together"
+              lead={
+                <>
+                  I&apos;m open to full-time roles, freelance projects, and
+                  collaborations that value craft, clarity, and long-term impact.
+                </>
+              }
+            />
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
-          {/* Left: Info */}
-          <AnimatedSection direction="left" className="lg:col-span-2">
-            <div className="space-y-8">
-              {/* Contact info */}
-              <div className="space-y-4">
-                {contactInfo.map(({ icon: Icon, label, value, href }) => (
-                  <div
-                    key={label}
-                    className="flex items-center gap-4 p-4 rounded-xl bg-muted/50 border border-border/50"
-                  >
-                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <Icon className="w-5 h-5 text-primary" />
+            <ul className="mt-10 space-y-3">
+              {contactInfo.map(({ icon: Icon, label, value, href }) => (
+                <li
+                  key={label}
+                  className="flex items-center gap-4 rounded-xl border border-border bg-card p-4 shadow-soft"
+                >
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-accent text-accent-foreground">
+                    <Icon className="size-4.5" />
+                  </span>
+                  <div className="min-w-0">
+                    <div className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                      {label}
                     </div>
-                    <div>
-                      <div className="text-xs text-muted-foreground font-medium uppercase tracking-wider">
-                        {label}
-                      </div>
-                      {href ? (
-                        <a
-                          href={href}
-                          className="text-sm font-semibold hover:text-primary transition-colors"
-                        >
-                          {value}
-                        </a>
-                      ) : (
-                        <div className="text-sm font-semibold">{value}</div>
-                      )}
-                    </div>
+                    {href ? (
+                      <a
+                        href={href}
+                        className="break-all text-[0.95rem] font-semibold text-foreground underline-offset-4 transition-colors hover:text-primary hover:underline"
+                      >
+                        {value}
+                      </a>
+                    ) : (
+                      <div className="text-[0.95rem] font-semibold text-foreground">{value}</div>
+                    )}
                   </div>
-                ))}
-              </div>
+                </li>
+              ))}
+            </ul>
 
-              {/* Social links */}
-              <div>
-                <h3 className="text-sm font-semibold mb-4 uppercase tracking-wider text-muted-foreground">
-                  Connect with me
-                </h3>
-                <div className="flex gap-3">
-                  {socialLinks.map(({ icon: Icon, href, label }) => (
-                    <a
-                      key={label}
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={label}
-                      className="w-10 h-10 rounded-lg bg-muted flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-all duration-200 hover:scale-110 border border-border/50"
-                    >
-                      <Icon className="w-4 h-4" />
-                    </a>
-                  ))}
-                </div>
+            <div className="mt-8">
+              <h3 className="mb-3 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                Connect with me
+              </h3>
+              <div className="flex gap-2">
+                {socialLinks.map(({ icon: Icon, href, label }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex h-10 items-center gap-2 rounded-lg border border-border bg-card px-4 text-sm font-medium text-muted-foreground transition-[color,border-color,transform] duration-200 hover:-translate-y-px hover:border-primary/40 hover:text-primary"
+                  >
+                    <Icon className="size-4" />
+                    {label}
+                  </a>
+                ))}
               </div>
             </div>
           </AnimatedSection>
 
-          {/* Right: Form */}
-          <AnimatedSection
-            direction="right"
-            delay={0.1}
-            className="lg:col-span-3"
-          >
-            <div className="bg-card border border-border rounded-2xl p-6 sm:p-8">
+          {/* Right: form */}
+          <AnimatedSection delay={0.08}>
+            <div className="rounded-2xl border border-border bg-card p-6 shadow-soft sm:p-8">
               {status === "success" ? (
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  className="flex flex-col items-center justify-center text-center py-12"
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  role="status"
+                  className="flex flex-col items-center justify-center py-12 text-center"
                 >
-                  <div className="w-16 h-16 rounded-full bg-green-500/10 flex items-center justify-center mb-4">
-                    <CheckCircle className="w-8 h-8 text-green-500" />
+                  <div className="mb-4 flex size-14 items-center justify-center rounded-full bg-accent">
+                    <CheckCircle className="size-7 text-primary" />
                   </div>
-                  <h3 className="text-xl font-bold mb-2">Message sent!</h3>
+                  <h3 className="mb-2 text-xl font-semibold">Message sent!</h3>
                   <p className="text-muted-foreground">
                     Thanks for reaching out. I&apos;ll get back to you within 24
                     hours.
@@ -185,25 +179,27 @@ export function Contact() {
                 <>
                   {status === "error" && (
                     <motion.div
-                      initial={{ opacity: 0, y: -8 }}
+                      initial={{ opacity: 0, y: -6 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="mb-5 flex items-center gap-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-sm"
+                      role="alert"
+                      className="mb-5 flex items-center gap-2 rounded-lg border border-destructive/25 bg-destructive/10 p-3 text-sm text-destructive"
                     >
-                      <span>⚠</span> {errorMsg}
+                      <AlertCircle className="size-4 shrink-0" /> {errorMsg}
                     </motion.div>
                   )}
                   <form onSubmit={handleSubmit} className="space-y-5">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                       <div className="space-y-2">
                         <Label htmlFor="name">Name</Label>
                         <Input
                           id="name"
                           name="name"
+                          autoComplete="name"
                           placeholder="silva harry"
                           value={formState.name}
                           onChange={handleChange}
                           required
-                          className="bg-muted/50 border-border/60 focus:border-primary"
+                          className={fieldClass}
                         />
                       </div>
                       <div className="space-y-2">
@@ -212,11 +208,12 @@ export function Contact() {
                           id="email"
                           name="email"
                           type="email"
+                          autoComplete="email"
                           placeholder="silva@gmail.com"
                           value={formState.email}
                           onChange={handleChange}
                           required
-                          className="bg-muted/50 border-border/60 focus:border-primary"
+                          className={fieldClass}
                         />
                       </div>
                     </div>
@@ -230,7 +227,7 @@ export function Contact() {
                         value={formState.subject}
                         onChange={handleChange}
                         required
-                        className="bg-muted/50 border-border/60 focus:border-primary"
+                        className={fieldClass}
                       />
                     </div>
 
@@ -244,24 +241,24 @@ export function Contact() {
                         onChange={handleChange}
                         required
                         rows={6}
-                        className="bg-muted/50 border-border/60 focus:border-primary resize-none"
+                        className="min-h-36 resize-none rounded-lg border-input bg-background px-3.5 py-3 text-[0.95rem] focus-visible:border-primary focus-visible:ring-primary/20"
                       />
                     </div>
 
                     <Button
                       type="submit"
                       size="lg"
-                      className="w-full gap-2"
+                      className="w-full"
                       disabled={status === "submitting"}
                     >
                       {status === "submitting" ? (
                         <>
-                          <Loader2 className="w-4 h-4 animate-spin" />
+                          <Loader2 className="size-4 animate-spin" />
                           Sending...
                         </>
                       ) : (
                         <>
-                          <Send className="w-4 h-4" />
+                          <Send className="size-4" />
                           Send Message
                         </>
                       )}

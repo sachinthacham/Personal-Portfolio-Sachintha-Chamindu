@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState, ReactNode } from "react";
+import { useRef, useEffect, ReactNode } from "react";
 import { motion, useInView, useAnimation, Variant } from "framer-motion";
 
 interface AnimatedSectionProps {
@@ -14,19 +14,19 @@ interface AnimatedSectionProps {
 
 const variants: Record<string, { hidden: Variant; visible: Variant }> = {
   up: {
-    hidden: { opacity: 0, y: 40 },
+    hidden: { opacity: 0, y: 16 },
     visible: { opacity: 1, y: 0 } as Variant,
   },
   down: {
-    hidden: { opacity: 0, y: -40 },
+    hidden: { opacity: 0, y: -16 },
     visible: { opacity: 1, y: 0 } as Variant,
   },
   left: {
-    hidden: { opacity: 0, x: -40 },
+    hidden: { opacity: 0, x: -16 },
     visible: { opacity: 1, x: 0 } as Variant,
   },
   right: {
-    hidden: { opacity: 0, x: 40 },
+    hidden: { opacity: 0, x: 16 },
     visible: { opacity: 1, x: 0 } as Variant,
   },
   none: {
@@ -40,7 +40,7 @@ export function AnimatedSection({
   className,
   delay = 0,
   direction = "up",
-  duration = 0.6,
+  duration = 0.5,
   once = true,
 }: AnimatedSectionProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -61,7 +61,7 @@ export function AnimatedSection({
       initial="hidden"
       animate={controls}
       variants={variants[direction]}
-      transition={{ duration, delay, ease: "easeOut" }}
+      transition={{ duration, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}
     >
       {children}
@@ -72,7 +72,7 @@ export function AnimatedSection({
 export function StaggerContainer({
   children,
   className,
-  staggerDelay = 0.1,
+  staggerDelay = 0.08,
   once = true,
 }: {
   children: ReactNode;
@@ -102,10 +102,10 @@ export function StaggerContainer({
 }
 
 export const staggerChild = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 12 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: "easeOut" as const },
+    transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] as const },
   },
 };

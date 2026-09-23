@@ -1,131 +1,70 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
 import { motion } from "framer-motion";
+import { staggerChild } from "@/components/ui/AnimatedSection";
 import { Blog } from "@/data/blogs";
-
-const categoryColors: Record<string, string> = {
-  Backend: "from-blue-500/20 via-blue-400/10 to-cyan-500/20",
-  Frontend: "from-pink-500/20 via-rose-400/10 to-orange-500/20",
-  DevOps: "from-orange-500/20 via-amber-400/10 to-yellow-500/20",
-  "System Design": "from-emerald-500/20 via-teal-400/10 to-green-500/20",
-  "AI/ML": "from-violet-500/20 via-purple-400/10 to-indigo-500/20",
-};
 
 interface BlogCardProps {
   blog: Blog;
   index?: number;
 }
 
-export function BlogCard({ blog, index = 0 }: BlogCardProps) {
-  const gradient = categoryColors[blog.category] || "from-primary/20 via-primary/10 to-primary/5";
+export function BlogCard({ blog }: BlogCardProps) {
   const isExternal = Boolean(blog.articleUrl);
   const href = blog.articleUrl ?? `/blogs/${blog.id}`;
 
+  const body = (
+    <>
+      <div className="relative aspect-video overflow-hidden border-b border-border bg-muted">
+        <Image
+          src={blog.image}
+          alt={blog.title}
+          fill
+          sizes="(min-width: 1024px) 360px, (min-width: 768px) 50vw, 100vw"
+          className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+        />
+      </div>
+
+      <div className="flex flex-1 flex-col p-5">
+        <div className="mb-3 flex items-center gap-2 text-xs font-medium text-muted-foreground">
+          <span className="text-primary">{blog.category}</span>
+          <span aria-hidden="true">·</span>
+          <span>{blog.readTime}</span>
+        </div>
+
+        <h3 className="font-heading text-lg font-semibold leading-snug text-foreground line-clamp-2">
+          {blog.title}
+        </h3>
+
+        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+          {blog.excerpt}
+        </p>
+
+        <span className="mt-auto inline-flex items-center gap-1 pt-5 text-sm font-medium text-primary">
+          {isExternal ? "Read on Medium" : "Read more"}
+          <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 group-hover:-translate-y-px group-hover:translate-x-px" />
+        </span>
+      </div>
+    </>
+  );
+
+  const cardClass =
+    "group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card shadow-soft transition-[transform,box-shadow,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-foreground/15 hover:shadow-lift";
+
   return (
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, y: 30 },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.5, delay: index * 0.1, ease: "easeOut" },
-        },
-      }}
-      className="h-full"
-    >
+    <motion.article variants={staggerChild} className="h-full">
       {isExternal ? (
-        <a
-          href={href}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block h-full group"
-        >
-          <Card className="h-full flex flex-col overflow-hidden border-border/60 hover:border-primary/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5 cursor-pointer">
-            {/* Banner */}
-            <div className={`h-40 bg-linear-to-br ${gradient} relative overflow-hidden`}>
-              <img
-                src={blog.image}
-                alt={blog.title}
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-t from-black/35 to-transparent" />
-              <Badge
-                variant="secondary"
-                className="absolute left-4 bottom-4 z-10 text-xs bg-background/80 backdrop-blur-sm border border-border/50"
-              >
-                {blog.category}
-              </Badge>
-            </div>
-
-            <CardHeader className="pb-2">
-              <h3 className="text-base font-bold leading-snug group-hover:text-primary transition-colors duration-200 line-clamp-2">
-                {blog.title}
-              </h3>
-            </CardHeader>
-
-            <CardContent className="flex-1 pb-4">
-              <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed mb-4">
-                {blog.excerpt}
-              </p>
-            </CardContent>
-
-            <CardFooter className="pt-2 flex items-center justify-center">
-              <span className="text-xs font-medium text-primary flex items-center gap-1 group-hover:gap-1.5 transition-all duration-200">
-                Read on Medium
-                <ArrowUpRight className="w-3 h-3" />
-              </span>
-            </CardFooter>
-          </Card>
+        <a href={href} target="_blank" rel="noopener noreferrer" className={cardClass}>
+          {body}
         </a>
       ) : (
-        <Link href={href} className="block h-full group">
-        <Card className="h-full flex flex-col overflow-hidden border-border/60 hover:border-primary/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/5 cursor-pointer">
-          {/* Banner */}
-          <div className={`h-40 bg-linear-to-br ${gradient} relative overflow-hidden`}>
-            <img
-              src={blog.image}
-              alt={blog.title}
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-linear-to-t from-black/35 to-transparent" />
-            <Badge
-              variant="secondary"
-              className="absolute left-4 bottom-4 z-10 text-xs bg-background/80 backdrop-blur-sm border border-border/50"
-            >
-              {blog.category}
-            </Badge>
-          </div>
-
-          <CardHeader className="pb-2">
-            <h3 className="text-base font-bold leading-snug group-hover:text-primary transition-colors duration-200 line-clamp-2">
-              {blog.title}
-            </h3>
-          </CardHeader>
-
-          <CardContent className="flex-1 pb-4">
-            <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed mb-4">
-              {blog.excerpt}
-            </p>
-          </CardContent>
-
-          <CardFooter className="pt-2 flex items-center justify-center">
-            <span className="text-xs font-medium text-primary flex items-center gap-1 group-hover:gap-1.5 transition-all duration-200">
-              Read more
-              <ArrowUpRight className="w-3 h-3" />
-            </span>
-          </CardFooter>
-        </Card>
+        <Link href={href} className={cardClass}>
+          {body}
         </Link>
       )}
-    </motion.div>
+    </motion.article>
   );
 }
