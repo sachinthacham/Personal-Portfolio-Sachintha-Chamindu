@@ -6,6 +6,7 @@ import Image from "next/image";
 import { ArrowRight, Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
 import { Button } from "@/components/ui/button";
+import { BrushStrokes } from "@/components/ui/BrushStrokes";
 
 const socialLinks = [
   { icon: GithubIcon, href: "https://github.com/sachinthacham", label: "GitHub" },
@@ -99,19 +100,16 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.15, ease }}
             className="mx-auto w-full max-w-[22rem] sm:max-w-sm lg:max-w-none"
           >
-            <div className="relative aspect-4/5 overflow-hidden rounded-[1.75rem] border border-border bg-surface shadow-soft">
-              {/* soft accent wash behind the cut-out portrait */}
-              <div
-                aria-hidden="true"
-                className="absolute inset-x-0 bottom-0 h-3/5 bg-linear-to-t from-accent to-transparent"
-              />
+            <div className="relative aspect-4/5">
+              {/* painted brush strokes behind the cut-out portrait */}
+              <BrushStrokes className="absolute inset-[-6%] h-[112%] w-[112%] opacity-90 dark:opacity-80" />
               <Image
                 src="/hero-removebg.png"
                 alt="Sachintha Chamindu"
                 fill
                 preload
                 sizes="(min-width: 1024px) 40vw, (min-width: 640px) 24rem, 22rem"
-                className="object-contain object-bottom"
+                className="object-contain object-bottom [mask-image:linear-gradient(to_bottom,black_82%,transparent)]"
               />
             </div>
           </motion.div>
