@@ -255,7 +255,7 @@ export const projects: Project[] = [
   {
     id: "quickserve-food-order-api",
     githubUrl: "https://github.com/sachinthacham/Foodie-FoodOrdering-Platform",
-    title: "Foodie - Food Order API",
+    title: "Foodie - FoodOrdering-Platform",
     description:
       "A backend API for handling food ordering workflows, including menu management, order lifecycle, and customer request processing.",
     longDescription:
@@ -337,6 +337,7 @@ export const projects: Project[] = [
   {
     id: "car-price-predictor",
     title: "Car Price Predictor",
+    githubUrl: "https://github.com/sachinthacham/Car_Price_Predictor_ML_Assignment",
     description:
       "A machine learning project for predicting used car prices using feature-based regression analysis.",
     longDescription:
