@@ -251,7 +251,7 @@ export const projects: Project[] = [
   },
   {
     id: "quickserve-food-order-api",
-    title: "QuickServe - Food Order API",
+    title: "Foodie - Food Order API",
     description:
       "A backend API for handling food ordering workflows, including menu management, order lifecycle, and customer request processing.",
     longDescription:
@@ -263,6 +263,17 @@ export const projects: Project[] = [
       "Validation and structured error handling for API stability",
       "Modular backend structure ready for integration with web and mobile clients",
     ],
+    galleryImages: [
+      "/projects/foodie/cart.png",
+      "/projects/foodie/checkout.png",
+      "/projects/foodie/favourites.png",
+      "/projects/foodie/homepage.png",
+      "/projects/foodie/menu.png",
+      "/projects/foodie/orders.png",
+      "/projects/foodie/restaurants.png",
+      "/projects/foodie/sign-in.png",
+    ],
+    showGallery: true,
     image: "/projects/cover-images/quickserve.png",
     tags: ["ASP.NET", "MSSQL"],
     featured: false,
