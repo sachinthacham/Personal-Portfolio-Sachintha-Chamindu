@@ -9,13 +9,21 @@ import { Button } from "@/components/ui/button";
 import { BrushStrokes } from "@/components/ui/BrushStrokes";
 
 const socialLinks = [
-  { icon: GithubIcon, href: "https://github.com/sachinthacham", label: "GitHub" },
+  {
+    icon: GithubIcon,
+    href: "https://github.com/sachinthacham",
+    label: "GitHub",
+  },
   {
     icon: LinkedinIcon,
     href: "https://www.linkedin.com/in/sachinthacham/",
     label: "LinkedIn",
   },
-  { icon: Mail, href: "mailto:sachinthachamindu.dev@gmail.com", label: "Email" },
+  {
+    icon: Mail,
+    href: "mailto:sachinthachamindu.dev@gmail.com",
+    label: "Email",
+  },
 ];
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -39,7 +47,10 @@ export function Hero() {
               {...fadeUp(0)}
               className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-primary shadow-soft"
             >
-              <span className="h-1.5 w-1.5 rounded-full bg-primary" aria-hidden="true" />
+              <span
+                className="h-1.5 w-1.5 rounded-full bg-primary"
+                aria-hidden="true"
+              />
               Software Engineer
             </motion.p>
 
@@ -57,26 +68,38 @@ export function Hero() {
               className="mt-6 max-w-[58ch] text-base leading-relaxed text-muted-foreground sm:text-lg"
             >
               I&apos;m{" "}
-              <span className="font-semibold text-foreground">Sachintha Chamindu</span>, a
-              Full-Stack Engineer with 3 years of experience building scalable web
-              applications, distributed systems, and microservice-based applications,
-              passionate about building reliable software and products that create real
-              impact.
+              <span className="font-semibold text-foreground">
+                Sachintha Chamindu
+              </span>
+              , a Full-Stack Engineer with 3 years of experience building
+              scalable web applications, distributed systems, and
+              microservice-based applications, passionate about building
+              reliable software and products that create real impact.
             </motion.p>
 
-            <motion.div {...fadeUp(0.18)} className="mt-9 flex flex-wrap items-center gap-3">
+            <motion.div
+              {...fadeUp(0.18)}
+              className="mt-9 flex flex-wrap items-center gap-3"
+            >
               <Button asChild size="lg" className="group">
                 <Link href="/#contact">
                   Let&apos;s Talk
                   <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
                 </Link>
               </Button>
+
               <Button asChild size="lg" variant="outline">
-                <Link href="/projects">View Projects</Link>
+                <a href="/Sachintha Chamindu - SE.pdf" download>
+                  Download CV
+                </a>
               </Button>
             </motion.div>
 
-            <motion.ul {...fadeUp(0.24)} className="mt-10 flex items-center gap-2" aria-label="Social links">
+            <motion.ul
+              {...fadeUp(0.24)}
+              className="mt-10 flex items-center gap-2"
+              aria-label="Social links"
+            >
               {socialLinks.map(({ icon: Icon, href, label }) => (
                 <li key={label}>
                   <a
