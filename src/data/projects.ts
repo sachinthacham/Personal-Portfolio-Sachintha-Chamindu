@@ -18,7 +18,7 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: "rgb-fusion-engine",
-    githubUrl: "https://github.com/sachinthacham/RGB-Based-Fusion-Engine",
+    githubUrl: "https://github.com/sachinthacham/RGB-Based-Fusion-Engine-Final-Year-Research",
     title: "RGB Based Fusion Engine",
     description:
       "An adaptive image fusion engine that combines EDSR and SRGAN super-resolution outputs to produce sharper, more detailed Sentinel-2 satellite imagery of coastal regions.",
@@ -47,7 +47,7 @@ export const projects: Project[] = [
   },
   {
     id: "supportiq-ai-customer-support",
-    githubUrl: "https://github.com/sachinthacham/AI-Powered-Customer-Support",
+    githubUrl: "https://github.com/sachinthacham/SupportIQ-AI-Powered-Customer-Support",
     title: "SupportIQ - AI-Powered Customer Support",
     description:
       "An AI help-desk that triages support tickets, escalates uncertain cases to humans, and answers policy questions from the company knowledge base with cited sources.",
@@ -110,7 +110,7 @@ export const projects: Project[] = [
   },
   {
     id: "swiftship-package-delivery",
-    githubUrl: "https://github.com/sachinthacham/SwiftShip-package-delivery",
+    githubUrl: "https://github.com/sachinthacham/SwiftShip-package-delivery-platform",
     title: "SwiftShip - Package Delivery System",
     description:
       "A microservices-based courier platform with customer, courier, and dispatcher portals, live shipment tracking, and nearest-driver auto-assignment.",
@@ -155,7 +155,8 @@ export const projects: Project[] = [
   },
   {
     id: "movietick-booking-app",
-    title: "MovieTick - Movie Ticket Booking App",
+    title: "Cinepass - Movie Ticket Booking App",
+    githubUrl: "https://github.com/sachinthacham/CinePass-Movie-TicketBooking-system",
     description:
       "A movie ticket reservation and booking platform with integrated showtime and transaction management.",
     longDescription:
@@ -189,6 +190,7 @@ export const projects: Project[] = [
   {
     id: "workcentral-workspace-management",
     title: "WorkCentral - Workspace Management System",
+    githubUrl: "https://github.com/sachinthacham/WorkCentral-workspace-management-system",
     description:
       "A collaborative platform for managing workspaces, teams, and operational workflows in a centralized system.",
     longDescription:
@@ -221,6 +223,7 @@ export const projects: Project[] = [
   {
     id: "realestate-pro",
     title: "RealEstate Pro",
+    githubUrl: "https://github.com/sachinthacham/RealEstatePro-Management-System",
     description:
       "A real estate platform for listing, browsing, and managing property data with a modern responsive user experience.",
     longDescription:
@@ -251,6 +254,7 @@ export const projects: Project[] = [
   },
   {
     id: "quickserve-food-order-api",
+    githubUrl: "https://github.com/sachinthacham/Foodie-FoodOrdering-Platform",
     title: "Foodie - Food Order API",
     description:
       "A backend API for handling food ordering workflows, including menu management, order lifecycle, and customer request processing.",
@@ -304,6 +308,7 @@ export const projects: Project[] = [
   {
     id: "learngate-lms",
     title: "Learngate - Learning Management System",
+    githubUrl: "https://github.com/sachinthacham/Learngate-Learning-Management-System-api",
     description:
       "A learning management system for course delivery, student engagement, and learning activity management.",
     longDescription:
